@@ -19,6 +19,7 @@ function getUTF8Code( str ) {
         utf8_binary.push( formatedBinary )
         allBytes += bytes
     }
+    
     return {
         origin: str ,
         codePoint ,
@@ -44,7 +45,7 @@ function showEncode( str ){
     )
 }
 
-let good = '好'
+let good = '好了呢'
 
 showEncode( good )
 
