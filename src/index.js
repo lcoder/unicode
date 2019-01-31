@@ -1,19 +1,30 @@
 const { unicodeCodePoint } = require( `./unicodeCodePoint` )
-const Buffer = require( 'buffer' ).Buffer
 const chalk = require( `chalk` )
-const { binaryFormat } = require( `./binaryFormat` )
+const { utf8HexAndBinary } = require( `./utf8` )
 
 
 
-function getEveryCode( str ) {
+function getUTF8Code( str ) {
     let codePoint = unicodeCodePoint( str ) ,
-        utf8_hex = Buffer.from( str ).toString( 'hex' ) ,
-        utf8_binary = Number( parseInt( utf8_hex , 16 ) ).toString( 2 )
+        utf8_hex_binarys = Array.from( str ).map( utf8HexAndBinary ) ,
+        utf8_hex = [] ,
+        utf8_binary = [] ,
+        allBytes = 0
+    for( let item of utf8_hex_binarys ) {
+        if ( item === undefined || item === null ) {
+            continue
+        }
+        let { hex , formatedBinary , bytes } = item
+        utf8_hex.push( hex )
+        utf8_binary.push( formatedBinary )
+        allBytes += bytes
+    }
     return {
         origin: str ,
-        codePoint: codePoint ,
-        utf8_hex: utf8_hex.toUpperCase() ,
-        utf8_binary ,
+        codePoint ,
+        utf8_hex: utf8_hex.join( `\u{20}` ) ,
+        utf8_binary: utf8_binary.join( `\u{20}` ) ,
+        allBytes ,
     }
 }
 
@@ -21,14 +32,14 @@ function showEncode( str ){
     let { origin , 
         codePoint , 
         utf8_hex , 
-        utf8_binary } = getEveryCode( str )
-    let utf8_binary_formated = binaryFormat( utf8_binary ) ,
-        utf8_binary_bytes = utf8_binary_formated.split( `\u{20}` ).length
+        utf8_binary ,
+        allBytes } = getUTF8Code( str )
+    
     console.log( chalk`
 {green 字符}: {red ${ origin } }
 {green unicode码点}: {red ${ codePoint } }
 {green UTF-8}: {red ${ utf8_hex } }
-{green UTF-8二进制}: {red ${ utf8_binary_formated } } 长度：{red ${utf8_binary_bytes} }字节
+{green UTF-8二进制}: {red ${ utf8_binary } } 长度：{red ${ allBytes } }字节
     `
     )
 }
@@ -36,3 +47,4 @@ function showEncode( str ){
 let good = '好'
 
 showEncode( good )
+

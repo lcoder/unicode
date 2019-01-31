@@ -9,7 +9,7 @@ exports.unicodeCodePoint = theString => {
     let uStr = ''
     for ( let char of theString ) {
         let theUnicode = char.codePointAt( 0 ).toString( 16 )
-        theUnicode = `\\u{${theUnicode}}`
+        theUnicode = `\\u{${ theUnicode.toUpperCase() }}`
         uStr += theUnicode
     }
     return uStr
