@@ -1,3 +1,5 @@
+/** https://www.w3cschool.cn/javascript_guide/javascript_guide-8kfa268f.html */
+
 function getSymbols(string) {
     var length = string.length ,
         index = -1 ,
@@ -20,4 +22,20 @@ function getSymbols(string) {
     return output;
 }
 
-console.log( getSymbols( '1𝌇23' ).length ) // 4
+console.log( Array.from( '𝌇' ).length ) // 4
+
+
+
+// 方法二 获取字符串长度
+
+/* 
+var regexAstralSymbols = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g; // 匹配UTF-16的代理对
+ 
+function countSymbols(string) {
+	return string
+		// 把代理对改为一个BMP的字符.
+		.replace(regexAstralSymbols, '_')
+		// …这时候取长度就妥妥的啦.
+		.length;
+}
+countSymbols('💩'); // 1 */

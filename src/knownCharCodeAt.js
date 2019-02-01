@@ -1,3 +1,6 @@
+/** 
+ * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
+*/
 function knownCharCodeAt (str, idx) {
     str += '';
     var code,
@@ -35,3 +38,6 @@ console.log( a )
 
 let b = knownCharCodeAt( '𝌇' , 0 ) // Number( 119559 ).toString( 16 )  = \u{1d307}
 console.log( b )
+
+
+console.log( '𝌇'.charCodeAt(0) )
