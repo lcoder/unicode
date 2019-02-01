@@ -1,4 +1,5 @@
-const x = 'x'
+const x = 'x' ,
+    repReg = new RegExp( x , 'g' )
 // 获取填充模板
 const gTemp = byteSize => {
     if ( ( typeof byteSize !== 'number' ) || byteSize < 1 || byteSize > 4 ) {
@@ -30,7 +31,7 @@ const fillTemp = ( temp , charBinary ) => {
             temp = head + char + rest
         }
     }
-    return temp.replace( x , '0' )
+    return temp.replace( repReg , '0' )
 }
 
 function codePoint2UTF8Binary( char ) {
