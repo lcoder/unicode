@@ -1,8 +1,10 @@
+/**
+ * unicode 查询网站
+ * https://codepoints.net/
+*/
 const { unicodeCodePoint } = require( `./unicodeCodePoint` )
 const chalk = require( `chalk` )
 const { utf8HexAndBinary } = require( `./utf8` )
-
-
 
 function getUTF8Code( str ) {
     let codePoint = unicodeCodePoint( str ) ,
@@ -45,7 +47,7 @@ function showEncode( str ){
     )
 }
 
-let good = '好了呢'
+let good = '你'
 
 showEncode( good )
 
